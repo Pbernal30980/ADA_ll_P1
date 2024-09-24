@@ -1,6 +1,6 @@
 # Proyecto 1 ADA ||
 
-##Integrantes
+## Integrantes
 - [Pedro Bernal Londoño] ()
 - [Jota Emilio Lopez] ()
 - [Esmeralda Rivas Guzman] ()
