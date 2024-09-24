@@ -2,5 +2,5 @@
 
 ## Integrantes
 - **Pedro Bernal Londoño** -
-- **Jota Emilio Lopez** - 
+- **Jota Emilio López** - 2259394 
 - **Esmeralda Rivas Guzman** - 
