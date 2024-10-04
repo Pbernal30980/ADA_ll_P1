@@ -1,5 +1,5 @@
 
-def transform_string_brute_force(base_string, target_string, cost):
+def transform_string_brute_force(base_string:str, target_string:str, cost:dict) -> tuple:
     """
     Transforms the base_string into the target_string using a brute-force approach and calculates the minimum cost 
     and the sequence of operations required.

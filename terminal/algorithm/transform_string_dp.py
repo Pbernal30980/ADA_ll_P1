@@ -1,5 +1,5 @@
 
-def transform_string_dp(base_string, target_string, cost):
+def transform_string_dp(base_string:str, target_string:str, cost:dict) -> tuple:
     """
     Transforms the base_string into the target_string using dynamic programming
     to minimize the cost of operations. The operations and their respective costs
@@ -75,7 +75,7 @@ def transform_string_dp(base_string, target_string, cost):
     steps = build_operation_steps(op, m, n)
     return dp[0][0], steps
 
-def build_operation_steps(op, m, n):
+def build_operation_steps(op:list, m:int, n:int) -> list:
     """
     Constructs a list of operation steps to transform one string into another based on a given operation matrix.
     Args:
