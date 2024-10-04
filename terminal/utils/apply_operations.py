@@ -1,4 +1,4 @@
-def apply_operations(base_string, operations):
+def apply_operations(base_string:str, operations:list) -> str:
     """
     Applies a series of operations to a base string and returns the modified string.
 
