@@ -102,6 +102,7 @@ def build_operation_steps(op, m, n):
         elif operation.startswith('insert'):
             j += 1
         elif operation.startswith('kill'):
+            i += 1
             if op[i][j] == 'kill':
                 break
         
