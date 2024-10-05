@@ -17,44 +17,57 @@ def transform_string_greedy(base_string:str, target_string:str, cost:dict) -> tu
     """
     m = len(base_string)
     n = len(target_string)
-    
-    i = 0 
-    j = 0 
+
+    i = 0
+    j =  0
     total_cost = 0
     operations = []
-    
+
     while i < m or j < n:
-        if i < m and j < n and base_string[i] == target_string[j]:
-            if cost['advance'] < cost['replace']:
-                total_cost += cost['advance']
-                operations.append('advance')
-            else:
-                total_cost += cost['replace']
-                operations.append(f'replace {target_string[j]}')
-            i += 1
-            j += 1
-
-        elif i < m and j < n:
-            total_cost += cost['replace']
-            operations.append(f'replace {target_string[j]}')
-            i += 1
-            j += 1
-
-        elif j < n:
-            total_cost += cost['insert']
+        if i == m:
             operations.append(f'insert {target_string[j]}')
+            total_cost += cost['insert']
             j += 1
+            continue
 
-        elif i < m:
-            if i < m - 1 and j == n:
-                total_cost += cost['kill']
-                operations.append(f'kill')
-                break
-            else:
+        if j == n:
+            if cost['delete'] * (m - i) < cost['kill']:
+                operations.append('delete')
                 total_cost += cost['delete']
-                operations.append(f'delete')
                 i += 1
-    
+            else:
+                operations.append('kill')
+                total_cost += cost['kill']
+                break
+            continue
+
+       
+        if base_string[i] == target_string[j]:
+            if cost['advance'] < cost['replace']:
+                operations.append('advance')
+                total_cost += cost['advance']
+            else:
+                operations.append(f'replace {target_string[j]}')
+                total_cost += cost['replace']
+            i += 1
+            j += 1
+        else:
+
+            if cost['replace'] <= cost['delete'] and cost['replace'] <= cost['insert'] and cost['replace'] <= cost['delete'] + cost['insert']:
+                operations.append(f'replace {target_string[j]}')
+                total_cost += cost['replace']
+                i += 1
+                j += 1
+            elif cost['delete'] + cost['insert'] <= cost['replace']:
+                operations.append('delete')
+                total_cost += cost['delete']
+                i += 1
+                operations.append(f'insert {target_string[j]}')
+                total_cost += cost['insert']
+                j += 1
+            else:
+                operations.append(f'insert {target_string[j]}')
+                total_cost += cost['insert']
+                j += 1
+
     return total_cost, operations
-
-
