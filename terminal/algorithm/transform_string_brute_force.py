@@ -1,4 +1,21 @@
-def transform_string_brute_force(base_string, target_string, cost):
+def transform_string_brute_force(base_string:str, target_string:str, cost:dict) -> tuple:
+    """
+    Transforms the base_string into the target_string using a brute force approach, 
+    considering the given costs for different operations.
+    Args:
+        base_string (str): The initial string to be transformed.
+        target_string (str): The desired string after transformation.
+        cost (dict): A dictionary containing the costs of various operations:
+            - 'insert': Cost of inserting a character.
+            - 'delete': Cost of deleting a character.
+            - 'replace': Cost of replacing a character.
+            - 'advance': Cost of advancing when characters match.
+            - 'kill': Cost of killing the remaining characters in the base_string.
+    Returns:
+        tuple: A tuple containing:
+            - int: The minimum cost to transform base_string into target_string.
+            - list: A list of operations performed to achieve the transformation.
+    """
     def brute_force(base_string:str, target_string:str, i:int, j:int):
         m, n = len(base_string), len(target_string)
         if i == m and j == n:
