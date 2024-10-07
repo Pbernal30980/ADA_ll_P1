@@ -25,7 +25,6 @@ def transform_string_dp(base_string:str, target_string:str, cost:dict) -> tuple:
     dp[m][n] = 0
 
     for i in range(m, -1, -1):
-        print( m - i )
         if m * cost['delete']   <  cost['kill']:
             dp[i][n] = m - i * cost['delete']
             op[i][n] = 'delete'
