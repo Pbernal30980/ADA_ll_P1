@@ -25,9 +25,9 @@ def transform_string_dp(base_string:str, target_string:str, cost:dict) -> tuple:
     dp[m][n] = 0
 
     for i in range(m, -1, -1):
-        cost_delete = (m - i) * cost['delete']        
-        if cost_delete <  cost['kill']:
-            dp[i][n] = cost_delete
+        print( m - i )
+        if m * cost['delete']   <  cost['kill']:
+            dp[i][n] = m - i * cost['delete']
             op[i][n] = 'delete'
         else:
             dp[i][n] = cost['kill']
@@ -50,6 +50,8 @@ def transform_string_dp(base_string:str, target_string:str, cost:dict) -> tuple:
                     op[i][j] = 'advance'
                 elif dp[i][j] == cost_replace:
                     op[i][j] = f'replace {target_string[j]}'
+                continue
+                
 
             cost_replace = dp[i + 1][j + 1] + cost['replace']
             cost_delete = dp[i + 1][j] + cost['delete']
@@ -57,7 +59,6 @@ def transform_string_dp(base_string:str, target_string:str, cost:dict) -> tuple:
             cost_kill = dp[i + 1][j] + cost['kill'] + ((n - j) * cost['insert'])
 
             dp[i][j] = min(
-                dp[i][j],
                 cost_replace,
                 cost_delete,
                 cost_insert,
