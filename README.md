@@ -15,6 +15,8 @@ sh test.sh
 - Ejecutar un test en específico
 ```bash
 sh test.sh nombre_del_test
+sh test.sh smart_terminal_test
+sh test.sh public_auction_test
 ```
 
 o 
