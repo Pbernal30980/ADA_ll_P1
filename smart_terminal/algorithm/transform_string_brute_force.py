@@ -16,8 +16,9 @@ def transform_string_brute_force(base_string:str, target_string:str, cost:dict) 
             - int: The minimum cost to transform base_string into target_string.
             - list: A list of operations performed to achieve the transformation.
     """
+    m, n = len(base_string), len(target_string)
+
     def brute_force(base_string:str, target_string:str, i:int, j:int):
-        m, n = len(base_string), len(target_string)
         if i == m and j == n:
             return 0, []
         
