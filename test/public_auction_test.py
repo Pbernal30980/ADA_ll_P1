@@ -62,11 +62,11 @@ class PublicAuctionTest(unittest.TestCase):
 
         n = 3
         offers = [{'price': 500, 'min': 100, 'max': 600}, 
-                  {'price': 45, 'min': 400, 'max': 800},
+                  {'price': 450, 'min': 400, 'max': 800},
                   {'price': 300, 'min': 100, 'max': 300},
                   {'price': 100, 'min': 0, 'max': 1000}]
-        expected_assignment = [600, 0, 300, 100]
-        expected_vr = 400000
+        expected_assignment = [600, 400, 0, 0]
+        expected_vr = 480000
         assignment, vr = auction_dp(A, B, n, offers)
         self.assertEqual(assignment, expected_assignment, 'The assignment is not correct.')
         self.assertEqual(vr, expected_vr, 'The value is not correct.')
@@ -102,11 +102,11 @@ class PublicAuctionTest(unittest.TestCase):
 
         n = 3
         offers = [{'price': 500, 'min': 100, 'max': 600}, 
-                  {'price': 45, 'min': 400, 'max': 800},
+                  {'price': 450, 'min': 400, 'max': 800},
                   {'price': 300, 'min': 100, 'max': 300},
                   {'price': 100, 'min': 0, 'max': 1000}]
-        expected_assignment = [600, 0, 300, 100]
-        expected_vr = 400000
+        expected_assignment = [600, 400, 0, 0]
+        expected_vr = 480000
         assignment, vr = auction_greedy(A, B, n, offers)
         self.assertEqual(assignment, expected_assignment, 'The assignment is not correct.')
         self.assertEqual(vr, expected_vr, 'The value is not correct.')
