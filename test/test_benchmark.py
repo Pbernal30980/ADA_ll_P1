@@ -7,6 +7,10 @@ from smart_terminal.algorithm.transform_string_dp import transform_string_dp
 from smart_terminal.algorithm.transform_string_brute_force import transform_string_brute_force
 from smart_terminal.algorithm.transform_string_greedy import transform_string_greedy
 
+from public_auction.algorithm.auction_brute_force import auction_brute_force
+from public_auction.algorithm.auction_dp import auction_dp
+from public_auction.algorithm.auction_greedy import auction_greedy
+
 class Benchmark:
     """
     A class to benchmark the execution time of functions over multiple iterations and visualize the results.
@@ -114,6 +118,8 @@ class Benchmark:
 if __name__ == '__main__':
     benchmark = Benchmark()
     cost = {'advance': 1, 'delete': 2, 'replace': 3, 'insert': 2, 'kill': 1}
+    A = 1000
+    B = 100
 
     string_transform_cases = [
         {
@@ -138,10 +144,43 @@ if __name__ == '__main__':
         }
     ]
 
-    for case in string_transform_cases:
-        benchmark.add_function(transform_string_dp, case)
-        benchmark.add_function(transform_string_brute_force, case)
-        benchmark.add_function(transform_string_greedy, case)
+    public_auction_cases = [
+        {
+            'name': 'Case n = 0',
+            'args': [A, B, 0, [{'price': 100, 'min': 0, 'max': 1000}]]
+        },
+        {
+            'name': 'Case n = 1',
+            'args': [A, B, 1, [{'price': 500, 'min': 100, 'max': 600},
+                               {'price': 100, 'min': 0, 'max': 1000}]]
+        },
+        {
+            'name': 'Case n = 2',
+            'args': [A, B, 2, [{'price': 500, 'min': 100, 'max': 600},
+                               {'price': 450, 'min': 400, 'max': 800},
+                               {'price': 100, 'min': 0, 'max': 1000}]]
+        },
+        {
+            'name': 'Case n = 3',
+            'args': [A, B, 3, [{'price': 500, 'min': 400, 'max': 600},
+                               {'price': 450, 'min': 100, 'max': 400},
+                               {'price': 400, 'min': 100, 'max': 400},
+                               {'price': 100, 'min': 0, 'max': 1000}]]
+        },
+        {
+            'name': 'Case n = 4',
+            'args': [A, B, 4, [{'price': 500, 'min': 400, 'max': 600},
+                               {'price': 450, 'min': 100, 'max': 400},
+                               {'price': 400, 'min': 100, 'max': 400},
+                               {'price': 200, 'min': 50, 'max': 200},
+                               {'price': 100, 'min': 0, 'max': 1000}]]
+        }
+    ]
+
+    for case in public_auction_cases:
+        benchmark.add_function(auction_dp, case)
+        benchmark.add_function(auction_brute_force, case)
+        benchmark.add_function(auction_greedy, case)
 
     benchmark.plot_results_per_case()
 
