@@ -24,7 +24,7 @@ def abrir_subasta():
     def agregar_ofertas():
         n = int(entry_ofertas.get())
 
-        for i in range(n - 1):
+        for i in range(n + 1):
             frame_oferta = tk.Frame(ventana_subasta)
             frame_oferta.grid(row=3 + i, column=0, columnspan=2)
 
