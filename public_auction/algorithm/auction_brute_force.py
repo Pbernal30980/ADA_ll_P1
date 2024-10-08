@@ -2,7 +2,7 @@ def auction_brute_force(A, B, n, offers):
     def calculate_value(assignment):
         total_value = 0
         remaining_actions = A
-        
+
         for i in range(n):
             if offers[i]['price'] >= B:
                 total_value += assignment[i] * offers[i]['price']
