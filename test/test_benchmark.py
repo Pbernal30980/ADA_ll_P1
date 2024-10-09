@@ -148,12 +148,16 @@ class Benchmark:
 
 
 if __name__ == '__main__':
-    benchmark = Benchmark(num_iterations=50, prefix='smart_terminal_')
+    benchmark = Benchmark(num_iterations=100, prefix='smart_terminal_')
     cost = {'advance': 1, 'delete': 2, 'replace': 3, 'insert': 2, 'kill': 1}
     A = 1000
     B = 100
 
     string_transform_cases = [
+        {
+            'name': 'Case empty to empty',
+            'args': [' ', ' ', cost],
+        },
         {
             'name': 'Case a to ab',
             'args': ['a', 'ab', cost],
@@ -221,7 +225,7 @@ if __name__ == '__main__':
         m = len(case['args'][0])
         n = len(case['args'][1])
         benchmark.add_function(transform_string_dp, case,theoretical_complexity=m * n)
-        benchmark.add_function(transform_string_brute_force, case, theoretical_complexity=4 ** (m + n))
+        benchmark.add_function(transform_string_brute_force, case, theoretical_complexity=4 ** min(m,n))
         benchmark.add_function(transform_string_greedy, case, theoretical_complexity=m + n)
 
     benchmark.plot_results_per_case()
