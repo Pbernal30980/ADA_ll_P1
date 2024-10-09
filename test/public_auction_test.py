@@ -35,7 +35,7 @@ class PublicAuctionTest(unittest.TestCase):
 
         n = 3
         offers = [{'price': 500, 'min': 100, 'max': 200}, 
-                  {'price': 450, 'min': 400, 'max': 300},
+                  {'price': 450, 'min': 400, 'max': 800},
                   {'price': 600, 'min': 100, 'max': 1000},
                   {'price': 100, 'min': 0, 'max': 1000}]
         expected_assignment = [0, 0, 1000, 0]
