@@ -63,6 +63,7 @@ def abrir_subasta():
     def calcular_subasta():
         acciones = int(entry_acciones.get())
         precio_minimo = int(entry_precio_minimo.get())
+        n = int(entry_ofertas.get())
 
         ofertas = []
         for entry_price, entry_min, entry_max in oferta_entries:
@@ -74,11 +75,11 @@ def abrir_subasta():
             ofertas.append(oferta)
 
         if algoritmo_var.get() == "brute_force":
-            best_assignment, total_value = auction_brute_force(acciones, precio_minimo, len(ofertas), ofertas)
+            best_assignment, total_value = auction_brute_force(acciones, precio_minimo, n, ofertas)
         elif algoritmo_var.get() == "dp":
-            best_assignment, total_value = auction_dp(acciones, precio_minimo, len(ofertas), ofertas)
+            best_assignment, total_value = auction_dp(acciones, precio_minimo, n, ofertas)
         else:
-            best_assignment, total_value = auction_greedy(acciones, precio_minimo, len(ofertas), ofertas)
+            best_assignment, total_value = auction_greedy(acciones, precio_minimo, n, ofertas)
 
         resultado = f"Mejor asignación: {best_assignment}, Valor total: {total_value}"
         label_resultado_subasta.config(text=resultado)
