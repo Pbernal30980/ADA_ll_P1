@@ -38,7 +38,7 @@ class Benchmark:
 
         func_name = func.__name__
         self.results[case_name][func_name] = self._benchmark_function(func, *case['args'])
-        self.theoretical_costs[case_name][func_name] = theoretical_complexity(case)
+        self.theoretical_costs[case_name][func_name] = theoretical_complexity
 
     def _benchmark_function(self, func, *args):
         times = []
@@ -173,10 +173,6 @@ if __name__ == '__main__':
         {
             'name': 'Case perro to gatos',
             'args': ['perro', 'gatos', cost]
-        },
-        {
-            'name': 'Case ingenioso to ingeniero',
-            'args': ['ingenioso', 'ingeniero', cost]
         }
     ]
 
@@ -222,9 +218,11 @@ if __name__ == '__main__':
     '''
 
     for case in string_transform_cases:
-        benchmark.add_function(transform_string_dp, case, lambda case: len(case['args'][0]) * len(case['args'][1]))
-        benchmark.add_function(transform_string_brute_force, case, lambda case: 4 ** (len(case['args'][0]) + len(case['args'][1])))
-        benchmark.add_function(transform_string_greedy, case, lambda case: len(case['args'][0]) + len(case['args'][1]))
+        m = len(case['args'][0])
+        n = len(case['args'][1])
+        benchmark.add_function(transform_string_dp, case,theoretical_complexity=m * n)
+        benchmark.add_function(transform_string_brute_force, case, theoretical_complexity=4 ** (m + n))
+        benchmark.add_function(transform_string_greedy, case, theoretical_complexity=m + n)
 
     benchmark.plot_results_per_case()
     benchmark.plot_average_results()
