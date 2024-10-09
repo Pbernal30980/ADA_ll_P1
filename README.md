@@ -18,6 +18,7 @@ si esta en linux, debe configurar un ambiente virtual con python3 y activarlo, l
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+sudo apt install python3-tk
 ```
 
 ## Correr los tests
