@@ -222,7 +222,7 @@ if __name__ == '__main__':
         },
         {
             'name': 'Case n = 4',
-            'args': [1000, 100, 4, [{'price': 500, 'min': 400, 'max': 600}, 
+            'args': [A, B, 4, [{'price': 500, 'min': 400, 'max': 600}, 
                                     {'price': 450, 'min': 100, 'max': 400}, 
                                     {'price': 400, 'min': 100, 'max': 400}, 
                                     {'price': 200, 'min': 50, 'max': 200}, 
