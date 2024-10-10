@@ -1,3 +1,4 @@
+import sys
 import time
 import numpy as np
 import matplotlib.pyplot as plt
@@ -148,7 +149,22 @@ class Benchmark:
 
 
 if __name__ == '__main__':
-    benchmark = Benchmark(num_iterations=100, prefix='smart_terminal_')
+    args = sys.argv
+    prefix = ''
+    
+    if len(args) == 1:
+        print('Please provide smart_terminal or public_auction as argument')
+        sys.exit(1)
+
+    if  args[1] not in ['smart_terminal', 'public_auction']:
+        print('Please provide smart_terminal or public_auction as argument')
+        sys.exit(1)
+    
+    print(f'Running benchmark for {args[1]}')
+
+    prefix = args[1] + '_'
+        
+    benchmark = Benchmark(num_iterations=50, prefix=prefix)
     cost = {'advance': 1, 'delete': 2, 'replace': 3, 'insert': 2, 'kill': 1}
     A = 1000
     B = 100
@@ -213,20 +229,21 @@ if __name__ == '__main__':
         }
     ]
 
-    '''
-    #TODO: Define theoretical complexity for each function
-    for case in public_auction_cases:
-        benchmark.add_function(auction_dp, case)
-        benchmark.add_function(auction_brute_force, case)
-        benchmark.add_function(auction_greedy, case)
-    '''
-
-    for case in string_transform_cases:
-        m = len(case['args'][0])
-        n = len(case['args'][1])
-        benchmark.add_function(transform_string_dp, case,theoretical_complexity=m * n)
-        benchmark.add_function(transform_string_brute_force, case, theoretical_complexity=4 ** min(m,n))
-        benchmark.add_function(transform_string_greedy, case, theoretical_complexity=m + n)
+    if prefix == 'smart_terminal_':
+            for case in string_transform_cases:
+                m = len(case['args'][0])
+                n = len(case['args'][1])
+                benchmark.add_function(transform_string_dp, case,theoretical_complexity=m * n)
+                benchmark.add_function(transform_string_brute_force, case, theoretical_complexity=4 ** min(m,n))
+                benchmark.add_function(transform_string_greedy, case, theoretical_complexity=m + n)
+    else:
+        '''
+        #TODO: Define theoretical complexity for each function
+        for case in public_auction_cases:
+            benchmark.add_function(auction_dp, case)
+            benchmark.add_function(auction_brute_force, case)
+            benchmark.add_function(auction_greedy, case)
+        '''
 
     benchmark.plot_results_per_case()
     benchmark.plot_average_results()
