@@ -3,6 +3,7 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import math
 
 from smart_terminal.algorithm.transform_string_dp import transform_string_dp
 from smart_terminal.algorithm.transform_string_brute_force import transform_string_brute_force
@@ -221,11 +222,11 @@ if __name__ == '__main__':
         },
         {
             'name': 'Case n = 4',
-            'args': [A, B, 4, [{'price': 500, 'min': 400, 'max': 600},
-                               {'price': 450, 'min': 100, 'max': 400},
-                               {'price': 400, 'min': 100, 'max': 400},
-                               {'price': 200, 'min': 50, 'max': 200},
-                               {'price': 100, 'min': 0, 'max': 1000}]]
+            'args': [1000, 100, 4, [{'price': 500, 'min': 400, 'max': 600}, 
+                                    {'price': 450, 'min': 100, 'max': 400}, 
+                                    {'price': 400, 'min': 100, 'max': 400}, 
+                                    {'price': 200, 'min': 50, 'max': 200}, 
+                                    {'price': 100, 'min': 0, 'max': 1000}]]
         }
     ]
 
@@ -237,13 +238,18 @@ if __name__ == '__main__':
                 benchmark.add_function(transform_string_brute_force, case, theoretical_complexity=4 ** min(m,n))
                 benchmark.add_function(transform_string_greedy, case, theoretical_complexity=m + n)
     else:
-        '''
-        #TODO: Define theoretical complexity for each function
+        
         for case in public_auction_cases:
-            benchmark.add_function(auction_dp, case)
-            benchmark.add_function(auction_brute_force, case)
-            benchmark.add_function(auction_greedy, case)
-        '''
+            A = case['args'][0]
+            n = case['args'][2]
+            m = max(offer['max'] for offer in case ['args'][3])
+            benchmark.add_function(auction_dp, case, theoretical_complexity=n * (A ** 2))
+            benchmark.add_function(auction_brute_force, case, theoretical_complexity=n * (m ** n))
+            if n > 0:
+                benchmark.add_function(auction_greedy, case, theoretical_complexity=n * (math.log(n)))
+            else:
+                benchmark.add_function(auction_greedy, case, theoretical_complexity=n)
+        
 
     benchmark.plot_results_per_case()
     benchmark.plot_average_results()
