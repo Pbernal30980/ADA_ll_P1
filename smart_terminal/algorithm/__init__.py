@@ -42,43 +42,69 @@ def calcular():
         messagebox.showerror("Error", "Selecciona un algoritmo.")
         return
 
-    # Mostrar las operaciones paso a paso
-    mostrar_pasos(cadena_actual, operations, cost)
+    mostrar_pasos(cadena_actual, cadena_objetivo, operations, cost)
 
-def mostrar_pasos(cadena_actual, operations, cost):
+def mostrar_pasos(cadena_actual, cadena_objetivo, operations, cost):
     # Reiniciar el resultado previo
     label_resultado.config(text="")
     paso_actual = 0
     costo_acumulado = 0
-
+    index_actual = 0  # posición actual en la cadena
+    
     def ejecutar_paso():
-        nonlocal paso_actual, cadena_actual, costo_acumulado
+        nonlocal paso_actual, cadena_actual, costo_acumulado, index_actual
+        
         if paso_actual < len(operations):
             operacion = operations[paso_actual]
+            operacion_descripcion = ""
 
             if operacion.startswith("advance"):
-                cadena_actual = cadena_actual[1:]
+                operacion_descripcion = "Avanzar"
+                index_actual += 1
                 costo_acumulado += cost['advance']
+            
             elif operacion.startswith("replace"):
-                cadena_actual = operacion.split()[1] + cadena_actual[1:]
+                nuevo_caracter = operacion.split()[1]
+                cadena_actual = cadena_actual[:index_actual] + nuevo_caracter + cadena_actual[index_actual+1:]
+                operacion_descripcion = f"Reemplazar por '{nuevo_caracter}'"
                 costo_acumulado += cost['replace']
+            
             elif operacion.startswith("delete"):
-                cadena_actual = cadena_actual[1:]
+                cadena_actual = cadena_actual[:index_actual] + cadena_actual[index_actual+1:]
+                operacion_descripcion = "Eliminar carácter"
                 costo_acumulado += cost['delete']
+            
             elif operacion.startswith("kill"):
-                cadena_actual = ""
+                cadena_actual = cadena_actual[:index_actual]
+                operacion_descripcion = "Eliminar el resto (Kill)"
                 costo_acumulado += cost['kill']
+            
             elif operacion.startswith("insert"):
-                caracter = operacion.split()[1]
-                cadena_actual = caracter + cadena_actual
+                nuevo_caracter = operacion.split()[1]
+                cadena_actual = cadena_actual[:index_actual] + nuevo_caracter + cadena_actual[index_actual:]
+                operacion_descripcion = f"Insertar '{nuevo_caracter}'"
+                index_actual += 1  # Mover el índice a la derecha tras insertar
                 costo_acumulado += cost['insert']
-
-            resultado = f"Paso {paso_actual + 1}: {operacion}\nCadena actual: {cadena_actual}\nCosto acumulado: {costo_acumulado}"
+            
+            resultado = (
+                f"Paso {paso_actual + 1}: {operacion_descripcion}\n"
+                f"Cadena actual: {cadena_actual}\n"
+                f"Cadena objetivo: {cadena_objetivo}\n"
+                f"Posición actual: {index_actual}\n"
+                f"Costo acumulado: {costo_acumulado}"
+            )
             label_resultado.config(text=resultado)
 
             # Avanzar al siguiente paso después de 1 segundo
             paso_actual += 1
             ventana.after(1000, ejecutar_paso)
+        else:
+            resultado_final = (
+                f"Transformación completada.\n"
+                f"Cadena final: {cadena_actual}\n"
+                f"Costo total: {costo_acumulado}"
+            )
+            label_resultado.config(text=resultado_final)
 
     ejecutar_paso()
 
