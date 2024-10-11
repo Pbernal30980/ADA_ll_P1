@@ -216,34 +216,39 @@ if __name__ == '__main__':
 
     public_auction_cases = [
         {
-            'name': 'Case n = 0',
-            'args': [A, B, 0, [{'price': 100, 'min': 0, 'max': 1000}]]
-        },
-        {
             'name': 'Case n = 1',
-            'args': [A, B, 1, [{'price': 500, 'min': 100, 'max': 600},
+            'args': [A, B, 1, [{'price': 500, 'min': 400, 'max': 600},
                                {'price': 100, 'min': 0, 'max': 1000}]]
         },
         {
             'name': 'Case n = 2',
-            'args': [A, B, 2, [{'price': 500, 'min': 100, 'max': 600},
-                               {'price': 450, 'min': 400, 'max': 800},
+            'args': [A, B, 2, [{'price': 450, 'min': 100, 'max': 300},
+                               {'price': 500, 'min': 400, 'max': 600},
                                {'price': 100, 'min': 0, 'max': 1000}]]
         },
         {
             'name': 'Case n = 3',
-            'args': [A, B, 3, [{'price': 500, 'min': 400, 'max': 600},
-                               {'price': 450, 'min': 100, 'max': 400},
-                               {'price': 400, 'min': 100, 'max': 400},
+            'args': [A, B, 3, [{'price': 450, 'min': 100, 'max': 300},
+                               {'price': 400, 'min': 100, 'max': 200},
+                               {'price': 500, 'min': 400, 'max': 600},
                                {'price': 100, 'min': 0, 'max': 1000}]]
         },
         {
             'name': 'Case n = 4',
             'args': [A, B, 4, [{'price': 500, 'min': 400, 'max': 600}, 
-                                    {'price': 450, 'min': 100, 'max': 400}, 
-                                    {'price': 400, 'min': 100, 'max': 400}, 
-                                    {'price': 200, 'min': 50, 'max': 200}, 
-                                    {'price': 100, 'min': 0, 'max': 1000}]]
+                               {'price': 200, 'min': 50, 'max': 100}, 
+                               {'price': 400, 'min': 100, 'max': 200}, 
+                               {'price': 450, 'min': 100, 'max': 300}, 
+                               {'price': 100, 'min': 0, 'max': 1000}]]
+        },
+        {
+            'name': 'Case n = 5',
+            'args': [A, B, 5, [{'price': 500, 'min': 400, 'max': 600},
+                               {'price': 200, 'min': 50, 'max': 100},
+                               {'price': 400, 'min': 100, 'max': 200},
+                               {'price': 450, 'min': 100, 'max': 300},
+                               {'price': 150, 'min': 0, 'max': 100},
+                               {'price': 100, 'min': 0, 'max': 1000}]]
         }
     ]
 
@@ -262,10 +267,8 @@ if __name__ == '__main__':
             m = max(offer['max'] for offer in case ['args'][3])
             benchmark.add_function(auction_dp, case, theoretical_complexity=n * (A ** 2))
             benchmark.add_function(auction_brute_force, case, theoretical_complexity=n * (m ** n))
-            if n > 0:
-                benchmark.add_function(auction_greedy, case, theoretical_complexity=n * (math.log(n)))
-            else:
-                benchmark.add_function(auction_greedy, case, theoretical_complexity=n)
+            benchmark.add_function(auction_greedy, case, theoretical_complexity=n * (math.log(n)))
+
         
 
     benchmark.plot_results_per_case()
