@@ -1,9 +1,10 @@
+import os
+import json
 import sys
 import time
+import math 
 import numpy as np
 import matplotlib.pyplot as plt
-import os
-import math
 
 from smart_terminal.algorithm.transform_string_dp import transform_string_dp
 from smart_terminal.algorithm.transform_string_brute_force import transform_string_brute_force
@@ -104,6 +105,16 @@ class Benchmark:
             if not os.path.exists(self.save_folder):
                 os.makedirs(self.save_folder)
 
+            json_path = os.path.join(self.save_folder, self.prefix + 'results_times.json')
+            with open(json_path, 'w') as f:
+                data = {}
+                for func_name, times in average_times.items():
+                    if func_name not in data:
+                        data[func_name] = []
+                    for time in times:
+                        data[func_name].append(time)      
+                f.write(json.dumps(data))
+               
             file_path = os.path.join(self.save_folder, self.prefix +  'average_results.png')
             plt.savefig(file_path)
             print(f'Average graph saved in: {file_path}')
