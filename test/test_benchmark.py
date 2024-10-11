@@ -110,9 +110,15 @@ class Benchmark:
                 data = {}
                 for func_name, times in average_times.items():
                     if func_name not in data:
-                        data[func_name] = []
+                        data[func_name] = {
+                            'values': [],
+                            'times': []
+                        }
                     for time in times:
-                        data[func_name].append(time)      
+                        data[func_name]['times'].append(time)
+                    case_names = self.results.keys()
+                    for case_name in case_names:
+                        data[func_name]['values'].append(self.theoretical_costs[case_name][func_name])   
                 f.write(json.dumps(data))
                
             file_path = os.path.join(self.save_folder, self.prefix +  'average_results.png')
