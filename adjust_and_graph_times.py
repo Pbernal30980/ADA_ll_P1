@@ -55,7 +55,7 @@ if __name__ == '__main__':
     complexity_functions_public_auction = {
         'auction_dp' : lambda n_A2, a, b: a * n_A2 + b,
         'auction_brute_force' : lambda nm_n, a, b: a * nm_n + b,
-        'auction_greedy' : lambda n, a, b: a * np.where(n > 0, n * np.log(n), 0) + b,
+        'auction_greedy' : lambda n, a, b: a * np.log(n) + b,
     }
 
 

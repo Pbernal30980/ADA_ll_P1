@@ -182,10 +182,10 @@ if __name__ == '__main__':
 
     prefix = args[1] + '_'
         
-    benchmark = Benchmark(num_iterations=50, prefix=prefix)
+    benchmark = Benchmark(num_iterations=1000, prefix=prefix)
     cost = {'advance': 1, 'delete': 2, 'replace': 3, 'insert': 2, 'kill': 1}
-    A = 1000
-    B = 100
+    A = 100
+    B = 10
 
     string_transform_cases = [
         {
@@ -217,38 +217,38 @@ if __name__ == '__main__':
     public_auction_cases = [
         {
             'name': 'Case n = 1',
-            'args': [A, B, 1, [{'price': 500, 'min': 400, 'max': 600},
-                               {'price': 100, 'min': 0, 'max': 1000}]]
+            'args': [A, B, 1, [{'price': 50, 'min': 40, 'max': 60},
+                               {'price': 10, 'min': 0, 'max': 100}]]
         },
         {
             'name': 'Case n = 2',
-            'args': [A, B, 2, [{'price': 450, 'min': 100, 'max': 300},
-                               {'price': 500, 'min': 400, 'max': 600},
-                               {'price': 100, 'min': 0, 'max': 1000}]]
+            'args': [A, B, 2, [{'price': 45, 'min': 10, 'max': 30},
+                               {'price': 50, 'min': 40, 'max': 60},
+                               {'price': 10, 'min': 0, 'max': 100}]]
         },
         {
             'name': 'Case n = 3',
-            'args': [A, B, 3, [{'price': 450, 'min': 100, 'max': 300},
-                               {'price': 400, 'min': 100, 'max': 200},
-                               {'price': 500, 'min': 400, 'max': 600},
-                               {'price': 100, 'min': 0, 'max': 1000}]]
+            'args': [A, B, 3, [{'price': 45, 'min': 10, 'max': 30},
+                               {'price': 40, 'min': 10, 'max': 20},
+                               {'price': 50, 'min': 40, 'max': 60},
+                               {'price': 10, 'min': 0, 'max': 100}]]
         },
         {
             'name': 'Case n = 4',
-            'args': [A, B, 4, [{'price': 500, 'min': 400, 'max': 600}, 
-                               {'price': 200, 'min': 50, 'max': 100}, 
-                               {'price': 400, 'min': 100, 'max': 200}, 
-                               {'price': 450, 'min': 100, 'max': 300}, 
-                               {'price': 100, 'min': 0, 'max': 1000}]]
+            'args': [A, B, 4, [{'price': 50, 'min': 40, 'max': 60}, 
+                               {'price': 20, 'min': 5, 'max': 10}, 
+                               {'price': 40, 'min': 10, 'max': 20}, 
+                               {'price': 45, 'min': 10, 'max': 30}, 
+                               {'price': 10, 'min': 0, 'max': 100}]]
         },
         {
             'name': 'Case n = 5',
-            'args': [A, B, 5, [{'price': 500, 'min': 400, 'max': 600},
-                               {'price': 200, 'min': 50, 'max': 100},
-                               {'price': 400, 'min': 100, 'max': 200},
-                               {'price': 450, 'min': 100, 'max': 300},
-                               {'price': 150, 'min': 0, 'max': 100},
-                               {'price': 100, 'min': 0, 'max': 1000}]]
+            'args': [A, B, 5, [{'price': 50, 'min': 40, 'max': 60},
+                               {'price': 20, 'min': 5, 'max': 10},
+                               {'price': 40, 'min': 10, 'max': 20},
+                               {'price': 45, 'min': 10, 'max': 30},
+                               {'price': 15, 'min': 0, 'max': 10},
+                               {'price': 10, 'min': 0, 'max': 100}]]
         }
     ]
 
@@ -267,7 +267,7 @@ if __name__ == '__main__':
             m = max(offer['max'] for offer in case ['args'][3])
             benchmark.add_function(auction_dp, case, theoretical_complexity=n * (A ** 2))
             benchmark.add_function(auction_brute_force, case, theoretical_complexity=n * (m ** n))
-            benchmark.add_function(auction_greedy, case, theoretical_complexity=n * (math.log(n)))
+            benchmark.add_function(auction_greedy, case, theoretical_complexity=n * (math.log(n)  if n > 1 else n ))
 
         
 
