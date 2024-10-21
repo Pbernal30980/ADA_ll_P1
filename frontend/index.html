@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Ejercicio a ejecutar:</h1>
+        <button id="btn-transformar">Transformar Cadenas</button>
+        <button onclick="location.href='/subasta'">Subasta Pública</button>
+    </div>
+    <div class="divider"></div>
+    <div class="content">
+        <div class="form-section" id="transformar-form" style="display: none;">
+            <h3>Costos</h3>
+            <div class="form-row">
+                <label for="costo_avance">Advance:</label>
+                <input type="number" id="costo_avance" placeholder="A">
+                <label for="costo_insert">Insert:</label>
+                <input type="number" id="costo_insert" placeholder="I">
+                <label for="costo_delete">Delete:</label>
+                <input type="number" id="costo_delete" placeholder="D">
+                <label for="costo_replace">Replace:</label>
+                <input type="number" id="costo_replace" placeholder="R">
+                <label for="costo_kill">Kill:</label>
+                <input type="number" id="costo_kill" placeholder="K">
+            </div>
+
+            <h3>Cadenas</h3>
+            <div class="cadena-row">
+                <label for="cadena_actual">Actual:</label>
+                <input type="text" id="cadena_actual" placeholder="Cadena Actual">
+                <label for="cadena_objetivo">Objetivo:</label>
+                <input type="text" id="cadena_objetivo" placeholder="Cadena Objetivo">
+            </div>
+
+            <h3>Algoritmo</h3>
+            <select id="algoritmo">
+                <option value="dinamica">Dinamica</option>
+                <option value="fuerza_bruta">Fuerza Bruta</option>
+                <option value="voraz">Voraz</option>
+            </select>
+            <button id="btn-iniciar">Iniciar</button>
+        </div>
+
+        <div class="results">
+            <div id="resultado">
+                <h3>Resultados</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Costo Total</th>
+                            <th>Pasos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultado-body">
+                        <tr>
+                            <td id="costo-total"></td>
+                            <td id="pasos"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="console">
+                <span id="cadena-dinamica"></span>
+                <span class="cursor"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
