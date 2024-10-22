@@ -32,7 +32,7 @@ def transform_string_dp(base_string:str, target_string:str, cost:dict) -> tuple:
             dp[i][n] = cost['kill']
             op[i][n] = 'kill'
 
-    for j in range(n, -1, -1):
+    for j in range(n, -1 if n > 0 else 0, -1):
         dp[m][j] = (n - j) * cost['insert']
         op[m][j] = f'insert {target_string[j - n]}'
 
