@@ -58,14 +58,14 @@ function iniciarConsola(pasos, cadena_actual) {
     const consoleDiv = document.getElementById('console');
     const cadenaDinamica = document.getElementById('cadena-dinamica');
     let indexActual = 0;
-    let cadenaActualArray = [...cadena_actual];
+    let cadenaActualArray = [...(cadena_actual || ' ')]; 
     let operaciones = [...pasos];
     cadenaDinamica.innerHTML = cadenaActualArray.map((char) => `<span>${char}</span>`).join('');
 
     consoleDiv.style.display = 'block';
 
     const ejecutarPaso = () => {
-        if (indexActual < pasos.length) {
+        if (indexActual < operaciones.length) {
             const operacion = operaciones[indexActual];
 
             const spans = cadenaDinamica.getElementsByTagName('span');
