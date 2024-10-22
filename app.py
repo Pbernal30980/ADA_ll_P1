@@ -51,9 +51,6 @@ def transformar_string():
     cadena_actual = data.get('cadena_actual')
     cadena_objetivo = data.get('cadena_objetivo')
 
-    if not cadena_actual or not cadena_objetivo:
-        return jsonify({'error': 'Las cadenas no pueden estar vacías.'}), 400
-
     costos = {
         'advance': data.get('costo_avance'),
         'insert': data.get('costo_insert'),

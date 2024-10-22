@@ -12,7 +12,7 @@ document.addEventListener('keydown', function(event) {
 });
 
 function ejecutarTransformacion() {
-    const cadena_actual = document.getElementById('cadena_actual').value || '';
+    const cadena_actual = document.getElementById('cadena_actual').value.trim();
     const cadena_objetivo = document.getElementById('cadena_objetivo').value.trim();
     const costos = {
         costo_avance: document.getElementById('costo_avance').value,
