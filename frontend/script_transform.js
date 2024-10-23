@@ -16,7 +16,7 @@ function executeTransformation() {
         cost_replace: document.getElementById('cost_replace').value,
         cost_kill: document.getElementById('cost_kill').value,
     };
-    const algorithm = document.getElementById('algoritmo').value;
+    const algorithm = document.getElementById('algorithm').value;
 
     fetch('/transform_string', {
         method: 'POST',

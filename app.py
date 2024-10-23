@@ -24,25 +24,29 @@ def send_static(path):
 
 @app.route('/auction', methods=['POST'])
 def calcular_subasta():
-    data = request.json
-    acciones = data.get('acciones')
-    precio_minimo = data.get('precio_minimo')
-    n = data.get('ofertas')
-    ofertas = data.get('ofertas_detalle')
+    try:
+        data = request.json
+        actions = data.get('actions')
+        min_price = data.get('minPrice')
+        n = data.get('offers')
+        offers = data.get('detailsOffers') 
 
-    algoritmo = data.get('algoritmo')
+        algorithm = data.get('algorithm')
 
-    if algoritmo == 'brute_force':
-        best_assignment, best_price = auction_brute_force(acciones, precio_minimo, n, ofertas)
-    elif algoritmo == 'dp':
-        best_assignment, best_price = auction_dp(acciones, precio_minimo, n, ofertas)
-    else:
-        best_assignment, best_price = auction_greedy(acciones, precio_minimo, n, ofertas)
-    
-    return jsonify({
-        'best_assignment': best_assignment,
-        'best_price': best_price
-    })
+        if algorithm == 'brute_force':
+            best_assignment, best_price = auction_brute_force(actions, min_price, n, offers)
+        elif algorithm == 'dp':
+            best_assignment, best_price = auction_dp(actions, min_price, n, offers)
+        else:
+            best_assignment, best_price = auction_greedy(actions, min_price, n, offers)
+        
+        return jsonify({
+            'best_assignment': best_assignment,
+            'best_price': best_price
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 @app.route('/transform_string', methods=['POST'])
 def transform_string():
