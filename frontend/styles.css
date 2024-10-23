@@ -67,23 +67,23 @@ button:hover {
     padding: 4px; 
     max-width: 80px; 
 }
-.cadena-row {
+.string-row {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
-.cadena-row input {
+.string-row input {
     flex: 1;
     margin-left: 10px;
 }
-#algoritmo {
+#algorithm {
     font-size: 16px; 
     padding: 4px; 
     margin-bottom: 10px; 
     width: auto; 
 }
-#resultado {
+#result {
     display: none; 
     margin-top: 20px;
     width: 100%;
