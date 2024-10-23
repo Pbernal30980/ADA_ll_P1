@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformar Cadenas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Transformar Cadenas</h1>
+        <button onclick="window.location.href='index.html'">Volver</button>
+    </div>
+
+    <div class="content">
+        <h3>Costos</h3>
+        <div class="form-row">
+            <label for="cost_advance">Advance:</label>
+            <input type="number" id="cost_advance">
+            <label for="cost_insert">Insert:</label>
+            <input type="number" id="cost_insert">
+            <label for="cost_delete">Delete:</label>
+            <input type="number" id="cost_delete">
+            <label for="cost_replace">Replace:</label>
+            <input type="number" id="cost_replace">
+            <label for="cost_kill">Kill:</label>
+            <input type="number" id="cost_kill">
+        </div>
+
+        <h3>Cadenas</h3>
+        <div class="string-row">
+            <label for="current_string">Actual:</label>
+            <input type="text" id="current_string">
+            <label for="target_string">Objetivo:</label>
+            <input type="text" id="target_string">
+        </div>
+
+        <h3>Algoritmo</h3>
+        <div class="algorithm-row">
+            <select id="algoritmo">
+                <option value="dynamic">Dinamica</option>
+                <option value="brute_force">Fuerza Bruta</option>
+                <option value="greedy">Voraz</option>
+            </select>
+            <button id="btn-start">Iniciar</button>
+        </div>
+
+        <div class="results">
+            <div id="result">
+                <h3>Resultados</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Costo Total</th>
+                            <th>Pasos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result-body">
+                        <tr>
+                            <td id="total-cost"></td>
+                            <td id="steps"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="console">
+                <span id="dynamic-string"></span>
+                <span class="cursor"></span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script_transform.js"></script>
+</body>
+</html>
+
