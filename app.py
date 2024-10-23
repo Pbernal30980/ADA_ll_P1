@@ -45,40 +45,41 @@ def calcular_subasta():
     })
 
 @app.route('/transform_string', methods=['POST'])
-def transformar_string():
+def transform_string():
     data = request.json
 
-    cadena_actual = data.get('cadena_actual')
-    cadena_objetivo = data.get('cadena_objetivo')
+    current_string = data.get('current_string')
+    target_string = data.get('target_string')
 
-    costos = {
-        'advance': data.get('costo_avance'),
-        'insert': data.get('costo_insert'),
-        'delete': data.get('costo_delete'),
-        'replace': data.get('costo_replace'),
-        'kill': data.get('costo_kill')
+    costs = {
+        'advance': data.get('cost_advance'),
+        'insert': data.get('cost_insert'),
+        'delete': data.get('cost_delete'),
+        'replace': data.get('cost_replace'),
+        'kill': data.get('cost_kill')
     }
 
-    for key, value in costos.items():
+    for key, value in costs.items():
         if value is None:
-            return jsonify({'error': f'El costo de {key} no puede estar vacío.'}), 400
+            return jsonify({'error': f'The cost of {key} cannot be empty.'}), 400
         try:
-            costos[key] = int(value)
+            costs[key] = int(value)
         except ValueError:
-            return jsonify({'error': f'El costo de {key} debe ser un número.'}), 400
+            return jsonify({'error': f'The cost of {key} must be a number.'}), 400
 
-    algoritmo = data.get('algoritmo')
+    algorithm = data.get('algorithm')
     
-    if algoritmo == 'fuerza_bruta':
-        total_cost, steps = transform_string_brute_force(cadena_actual, cadena_objetivo, costos)
-    elif algoritmo == 'dinamica':
-        total_cost, steps = transform_string_dp(cadena_actual, cadena_objetivo, costos)
-    elif algoritmo == 'voraz':
-        total_cost, steps = transform_string_greedy(cadena_actual, cadena_objetivo, costos)
+    if algorithm == 'brute_force':
+        total_cost, steps = transform_string_brute_force(current_string, target_string, costs)
+    elif algorithm == 'dynamic':
+        total_cost, steps = transform_string_dp(current_string, target_string, costs)
+    elif algorithm == 'greedy':
+        total_cost, steps = transform_string_greedy(current_string, target_string, costs)
     else:
-        return jsonify({'error': 'Algoritmo no válido'}), 400
+        return jsonify({'error': 'Invalid algorithm'}), 400
 
-    return jsonify({'costo_total': total_cost, 'pasos': steps})
+    return jsonify({'total_cost': total_cost, 'steps': steps})
+
 
 
 def open_browser():
