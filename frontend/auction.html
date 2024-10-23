@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subasta Pública</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Subasta Pública</h1>
+        <button onclick="window.location.href='index.html'">Volver</button>
+    </div>
+
+    <div class="content">
+        <h3>Datos</h3>
+        <div class="form-row">
+            <label for="actions">Acciones:</label>
+            <input type="number" id="actions">
+            <label for="price">Precio:</label>
+            <input type="number" id="price">
+            <label for="num_of_auctions">Número de ofertas:</label>
+            <input type="number" id="num_of_auctions">
+        </div> 
+
+        <h3>Ofertas</h3>
+        <div id="offer-container"></div>
+
+        <h3>Oferta del gobierno</h3>
+        <div id="offer-government">
+            <input type="text" id="government-offer" placeholder="precio, min, max" readonly>
+        </div>
+
+        <h3>Algoritmo</h3>
+        <div class="algorithm-row">
+            <select id="algorithm">
+                <option value="dynamic">Dinámica</option>
+                <option value="brute_force">Fuerza Bruta</option>
+                <option value="greedy">Voraz</option>
+            </select>
+            <button id="btn-start">Iniciar</button>
+        </div>
+
+       <div class="results">
+            <div id="result">
+                <h3>Resultados</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Asignaciones</th>
+                            <th>Valor (Vr)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result-body">
+                        <tr>
+                            <td id="best-assignment"></td>
+                            <td id="value"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+       </div> 
+
+        
+    </div>
+
+    <script src="script_auction.js"></script>
+</body>
+</html>
