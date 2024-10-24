@@ -3,8 +3,8 @@
 cd "$(dirname "$0")"
 
 if [ "$1" ]; then
-    PYTHONPATH=. python test/$1.py $2
+    PYTHONPATH=. python 3 test/$1.py $2
 else
 
-    PYTHONPATH=. python -m unittest discover -s test -p "*_test.py"
+    PYTHONPATH=. python 3 -m unittest discover -s test -p "*_test.py"
 fi
