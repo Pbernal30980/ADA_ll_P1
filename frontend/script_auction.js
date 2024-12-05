@@ -86,9 +86,31 @@ function displayResults(result) {
     const bestAssignments = document.getElementById('best-assignment');
     const maximumValue = document.getElementById('value');
 
-    resultDiv.style.display = 'block'; 
+    // Eliminar cualquier mensaje previo en el contenedor
+    const existingDescription = resultDiv.querySelector('p');
+    if (existingDescription) {
+        existingDescription.remove();
+    }
+
+    const resultDescription = document.createElement('p'); 
+
+    resultDiv.style.display = 'block';
     bestAssignments.innerText = result.best_assignment.join(', ');
-    maximumValue.innerText = result.best_price;   
+    maximumValue.innerText = result.best_price;
+
+    const assignments = result.best_assignment;
+    const numOffers = assignments.length - 1; 
+    let descriptionText = `Las asignaciones son: `;
+    assignments.forEach((value, index) => {
+        if (index < numOffers) {
+            descriptionText += `Oferente ${index + 1}: ${value}, `;
+        } else {
+            descriptionText += `Gobierno: ${value}.`;
+        }
+    });
+
+    resultDescription.innerText = descriptionText;
+    resultDiv.prepend(resultDescription); 
 }
 
 offerStructure();
