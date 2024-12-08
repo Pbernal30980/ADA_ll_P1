@@ -1,4 +1,20 @@
 def auction_dp(A, B, n, offers):
+    """
+    Solves the auction problem using dynamic programming to maximize the total value of offers 
+    by assigning actions to each offer within its minimum and maximum limits.
+    Args:
+        A (int): Total number of actions available.
+        B (int): The minimum price to consider a bid as valid.
+        n (int): Number of offers.
+        offers (list of dict): A list of offers, each containing:
+            - 'price': The price of the offer.
+            - 'min': The minimum number of actions to assign to the offer.
+            - 'max': The maximum number of actions that can be assigned.
+    Returns:
+        tuple: A tuple containing:
+            - best_assignment (list): Optimal assignment of actions to offers.
+            - total_value (int): Maximum total value obtained by the assignment.
+    """
     prices = [offers[i]['price'] for i in range(n)]
     mins = [offers[i]['min'] for i in range(n)]
     maxs = [offers[i]['max'] for i in range(n)]

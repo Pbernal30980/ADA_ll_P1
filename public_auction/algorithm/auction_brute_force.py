@@ -1,4 +1,20 @@
 def auction_brute_force(A, B, n, offers):
+    """
+    Solves the auction problem using a brute force approach by trying all possible 
+    allocations of shares to maximize the total value
+    Args:
+        A (int): The total number of shares available for allocation.
+        B (int): The minimum price to consider a bid as valid.
+        n (int): The number of bids.
+        offers (list of dictionaries): A list of dictionaries representing the bids, where each dictionary contains:
+        - 'price': The price of the bid.
+        - 'min': The minimum number of shares to allocate to this bid.
+        - 'max': The maximum number of shares that can be allocated to this bid.
+    Returns:
+        tuple: A tuple containing:
+        - best_assignment (list): A list of the number of shares allocated to each bid.
+        - total_value (int): The total value achieved by the best allocation.
+    """
     def calculate_value(assignment):
         total_value = 0
         remaining_actions = A

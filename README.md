@@ -20,6 +20,11 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Ejecutar el programa
+```bash
+python3 main.py
+```
+
 ## Correr los tests
 Para correr los tests, se debe ejecutar el siguiente comando en la terminal:
 - Ejecutar todos los tests
